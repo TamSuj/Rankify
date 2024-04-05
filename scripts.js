@@ -83,9 +83,9 @@ function editCardContent(card, newTitle, newImageURL) {
 // This calls the addCards() function when the page is first loaded
 document.addEventListener("DOMContentLoaded", showCards);
 
-function quoteAlert() {
-    console.log("Button Clicked!")
-    alert("I guess I can kiss heaven goodbye, because it got to be a sin to look this good!");
+function externalLinkAlert() {
+    console.log("Buy Button Clicked!")
+    alert("We're taking you to the external site");
 }
 
 function removeLastCard() {
