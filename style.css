@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto&display=swap');
 html,
 body {
     margin: 0;
     padding: 0;
 }
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto&display=swap')
 
 .main-header {
     background-color: rgba(0, 0, 0, .3);
@@ -68,4 +68,13 @@ button {
     cursor: pointer;
     margin: 0 10px;
     transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1E90FF;
+    color: white;
+}
+
+button:active {
+    transform: scale(0.95);
 }

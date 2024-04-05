@@ -2,39 +2,78 @@
 <html>
 
 <head>
-    <title>SEA Project</title>
+    <title>Top Artist Catalog | SEA Project</title>
     <meta name="description" content="A Catalog of Books">
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="scripts.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>" />
 </head>
 
 <body>
     <header class="main-header">
         <h1 class="title">Top Artist of the Week</h1>
     </header>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for an artist" onkeyup="searchArtist();">
+    </div>
+<!--    <div class="filter">-->
+<!--        <div class="filter-button" onclick="sortByRankDesc();">-->
+<!--            Descent Sort-->
+<!--        </div>-->
+<!--        <div class="filter-button" onclick="sortByRankAsc();">-->
+<!--            Ascend Sort-->
+<!--        </div>-->
+<!--        <div class="filter-button" onclick="filterPopGenre();">-->
+<!--            Pop-->
+<!--        </div>-->
+<!--        <div class="filter-button" onclick="filterRBGenre();">-->
+<!--            R&B-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+        <button onclick="sortBy('DESC');" class="button">
+            Descent Sort
+        </button>
+        <button onclick="sortBy('ASC');" class="button">
+            Ascend Sort
+        </button>
+        <button onclick="filterGenre('POP');" class="button">
+            Pop
+        </button>
+        <button onclick="filterGenre('R&B');" class="button">
+            R&B
+        </button>
+        <button onclick="filterGenre('ROCK');" class="button">
+            Rock
+        </button>
+        <button onclick="filterGenre('KPOP');" class="button">
+            K-Pop
+        </button>
+
     <div id="card-container">
         
     </div>
     <div class="card" style="display: none;">
-        <div class="card-content">
-            <h2>Artist Name</h2>
-            <div class="circle-card">Rank</div>
-            <img src="" alt="Artist image">
-            <ul>
-                <li>Genres</li>
-                <li>About Artist 2</li>
-            </ul>
+<!--        <div class="card-content">-->
+<!--            <h2>Artist Name</h2>-->
+<!--            <div class="circle-card">Rank</div>-->
+<!--            <img src="" alt="Artist image">-->
+<!--            <ul>-->
+<!--                <li>Genres</li>-->
+<!--                <li>About Artist 2</li>-->
+<!--            </ul>-->
 
-            <div class="card-description">
-            </div>
-        </div>
+<!--            <div class="card-description">-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="Artists"></div>
     </div>
     <div class="footer">
         <button onclick="quoteAlert();">
             Get A Quote!
-        </button>
-        <button onclick="removeLastCard();">
-            Remove A Card!
         </button>
     </div>
 </body>

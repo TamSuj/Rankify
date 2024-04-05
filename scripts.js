@@ -37,6 +37,8 @@ let Artist = {
     url: String,
 }
 
+
+
 // This is an array of strings (artist titles)
 let titles = [
     "Fresh Prince of Bel Air",
@@ -90,7 +92,31 @@ function externalLinkAlert() {
 }
 
 // Sorting artist according to their rank (DES/ASC)
-function sortByRank() {
+function sortBy(order) {
+    if (order === "ASC") {
+        // ascending order
+    } else if (order === "DES"){
+        // descending order
+
+    } else {
+        console.error("Invalid order")
+    }
+    // something here
+    showCards(); // Call showCards again to refresh
+}
+function filterGenre(type) {
+    if (type === "POP") {
+        // Pop genre
+    } else if (type === "R&B") {
+        // R&B genre
+    } else if (type === "KPOP") {
+        // KPOP genre
+    } else if (type === "ROCK") {
+        // Rock genre
+    }
+    else {
+        console.error("Invalid genre")
+    }
     // something here
     showCards(); // Call showCards again to refresh
 }
