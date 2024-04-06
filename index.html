@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Top Artist Catalog | SEA Project</title>
-    <meta name="description" content="A Catalog of Books">
+    <meta name="description" content="A Catalog of Top Artists">
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="scripts.js"></script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>" />
@@ -12,28 +11,13 @@
 <body>
     <header class="main-header">
         <h1 class="title">Top Artist of the Week</h1>
+        <p class="subtitle">The ultimate guide to the world's top artist ranked by Spotify</p>
     </header>
+
     <div class="search-bar">
-        <input type="text" id="search" placeholder="Search for an artist" onkeyup="searchArtist();">
+        <p>Search: </p>
+        <input type="text" id="search-box" placeholder="Search for an artist" onkeyup="searchArtist();">
     </div>
-<!--    <div class="filter">-->
-<!--        <div class="filter-button" onclick="sortByRankDesc();">-->
-<!--            Descent Sort-->
-<!--        </div>-->
-<!--        <div class="filter-button" onclick="sortByRankAsc();">-->
-<!--            Ascend Sort-->
-<!--        </div>-->
-<!--        <div class="filter-button" onclick="filterPopGenre();">-->
-<!--            Pop-->
-<!--        </div>-->
-<!--        <div class="filter-button" onclick="filterRBGenre();">-->
-<!--            R&B-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-
-
         <button onclick="sortBy('DESC');" class="button">
             Descent Sort
         </button>
@@ -53,22 +37,27 @@
             K-Pop
         </button>
 
-    <div id="card-container">
-        
-    </div>
-    <div class="card" style="display: none;">
-<!--        <div class="card-content">-->
-<!--            <h2>Artist Name</h2>-->
-<!--            <div class="circle-card">Rank</div>-->
-<!--            <img src="" alt="Artist image">-->
-<!--            <ul>-->
-<!--                <li>Genres</li>-->
-<!--                <li>About Artist 2</li>-->
-<!--            </ul>-->
+    <div id="card-container"></div>
+    <div class="card"  style="display: none;">
+        <div class="card-content">
+            <h2>Artist Name</h2>
 
-<!--            <div class="card-description">-->
-<!--            </div>-->
-<!--        </div>-->
+            <img src="https://4kwallpapers.com/images/wallpapers/lisa-blackpink-thai-singer-asian-girl-k-pop-singer-3840x2160-3232.jpg" alt="Artist image">
+
+            <div class="card-follower-count">Follower</div>
+            <div class="card-description">
+                <div class="card-genre">
+                    <ul>
+                        <li>Genre</li>
+                        <li>Genre</li>
+                        <li>Genre</li>
+                    </ul>
+                </div>
+                <div class="card-link">
+                    <a href="https://open.spotify.com/artist/"> Listen on Spotify </a>
+                </div>
+            </div>
+        </div>
         <div class="Artists"></div>
     </div>
     <div class="footer">

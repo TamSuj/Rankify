@@ -1,22 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800');
+@import url(https://fonts.googleapis.com/css?family=Lato);
 html,
 body {
     margin: 0;
     padding: 0;
+    /*font-family: "Open Sans", sans-serif;*/
+    font-family: Lato;
 }
 
 .main-header {
-    background-color: rgba(0, 0, 0, .3);
     padding-bottom: 10px;
 }
 
 .title {
     text-align: center;
-    margin: 0;
-    font-size: 8em;
-    font-family: "Open Sans", sans-serif;
+    font-size: 4em;
     font-weight: normal;
-    color: white;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.5em;
+    color: #777;
 }
 
 #card-container {
@@ -27,9 +32,10 @@ body {
 
 .card {
     width: 300px;
-    border: 1px solid #1E90FF; /* Border color matches the main blue */
+    border: 2px solid dimgrey;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    box-shadow: lightgrey 0px 0px 100px;
     margin: 10px;
     transition: transform 0.3s ease;
 }
@@ -48,6 +54,12 @@ body {
 .card img {
     width: 100%;
     height: auto;
+}
+
+.card-genre ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
 }
 
 .footer {
@@ -77,4 +89,25 @@ button:hover {
 
 button:active {
     transform: scale(0.95);
+}
+
+#search-box {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 20px;
+    border-color: dimgrey;
+}
+
+.search-bar {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.search-bar p{
+    padding-top: 10px;
+    margin-left: auto;
 }
