@@ -8,7 +8,31 @@ body {
     font-family: Lato;
 }
 
+.navbar-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid black;
+    height: 3rem;
+    text-align: center;
+    line-height: 2rem;
+}
+
+.navbar-menu ul li {
+    display: inline-block;
+    padding: 7px 13px;
+    text-align: center;
+    justify-content: space-evenly;
+    margin: 0 2rem 0 2rem;
+}
+
+.navbar-menu ul li a {
+    text-decoration: none;
+    color: black;
+}
+
 .main-header {
+    margin: 5rem 0 2rem 0;
     padding-bottom: 10px;
 }
 
@@ -22,26 +46,30 @@ body {
     text-align: center;
     font-size: 1.5em;
     color: #777;
+    font-family: "American Typewriter";
 }
 
 #card-container {
     display: flex;
-    justify-content: center;
-    margin: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 4rem 0 4rem;
 }
 
 .card {
-    width: 300px;
-    border: 2px solid dimgrey;
-    border-radius: 10px;
-    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-    box-shadow: lightgrey 0px 0px 100px;
-    margin: 10px;
+    width: 350px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Grey shadow */
+    margin: 1rem 2rem 3rem 2rem ;
     transition: transform 0.3s ease;
 }
 
+.card:hover {
+    transform: perspective(1000px) rotateY(10deg);
+}
+
 .card-content {
-    padding: 20px;
+    padding: 30px;
     font-family: "Verdana";
     color: #777;
 }
@@ -54,21 +82,78 @@ body {
 .card img {
     width: 100%;
     height: auto;
+    border-radius: 10px
 }
 
 .card-genre ul {
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    padding: 0;
+}
+
+.card-genre ul li {
+    display: inline-block;
+    background-color: #1E90FF;
+    color: white;
+    padding: 7px 13px;
+    margin-right: 5px;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+.card-genre ul li:nth-child(even) {
+    background-color: dimgrey;
+}
+
+.card-rank {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+.card-rank ul {
+    list-style-type: none;
+    justify-content: flex-end;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    transform: translateY(-32px);
+}
+
+.card-rank ul li {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 10px 13px;
+    border-radius: 30px;
+    text-align: center;
+    border: 3px solid white;
+}
+
+.card-follower-count {
+    transform: translateY(-25px);
+}
+
+.card-link a {
+    text-decoration: none;
+    color: black;
 }
 
 .footer {
     display: flex;
     justify-content: center;
-    background-color: rgba(0, 0, 0, .3);
+    border-top: 1px solid black;
     padding: 10px;
 }
 
+.sort-button {
+    margin-left: 1rem;
+}
+
+.filter-button {
+    margin-left: 1rem;
+    padding-right: 60px;
+}
 button {
     text-align: center;
     background-color: #FFFFFF;
@@ -78,7 +163,7 @@ button {
     color: #1E90FF;
     font-size: 18px;
     cursor: pointer;
-    margin: 0 10px;
+    margin: 10px 10px;
     transition: background-color 0.3s ease;
 }
 
@@ -91,16 +176,24 @@ button:active {
     transform: scale(0.95);
 }
 
+.filters {
+    display: flex;
+    margin-left: 8.5rem;
+    margin-bottom: 1rem;
+}
+
 #search-box {
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 10px 20px;
     margin: 20px;
     border-radius: 20px;
     border-color: dimgrey;
 }
 
 .search-bar {
+    margin-left: 8.5rem;
+    margin-bottom: 1rem;
     width: 300px;
     display: flex;
     justify-content: center;

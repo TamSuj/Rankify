@@ -2,13 +2,23 @@
 <html>
 <head>
     <title>Top Artist Catalog | SEA Project</title>
-    <meta name="description" content="A Catalog of Top Artists">
+    <meta name="description" content="A Catalog of Top Artists" charset="UTF-8">
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="scripts.js"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>" />
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="navbar-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="mailto:tammygayvalin@gmail.com">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <header class="main-header">
         <h1 class="title">Top Artist of the Week</h1>
         <p class="subtitle">The ultimate guide to the world's top artist ranked by Spotify</p>
@@ -16,40 +26,68 @@
 
     <div class="search-bar">
         <p>Search: </p>
-        <input type="text" id="search-box" placeholder="Search for an artist" onkeyup="searchArtist();">
+        <input type="text" id="search-box" placeholder="Search for an artist" onkeyup="searchByName();">
     </div>
-        <button onclick="sortBy('DESC');" class="button">
-            Descent Sort
-        </button>
-        <button onclick="sortBy('ASC');" class="button">
-            Ascend Sort
-        </button>
-        <button onclick="filterGenre('POP');" class="button">
-            Pop
-        </button>
-        <button onclick="filterGenre('R&B');" class="button">
-            R&B
-        </button>
-        <button onclick="filterGenre('ROCK');" class="button">
-            Rock
-        </button>
-        <button onclick="filterGenre('KPOP');" class="button">
-            K-Pop
-        </button>
+
+    <div class="filters">
+        <p>Filter by Genre:</p>
+        <div class="filter-button">
+            <button onclick="filterGenre('ALL');">
+                All
+            </button>
+            <button onclick="filterGenre('POP');">
+                Pop
+            </button>
+            <button onclick="filterGenre('R&B');">
+                R&B
+            </button>
+            <button onclick="filterGenre('ROCK');">
+                Rock
+            </button>
+            <button onclick="filterGenre('KPOP');">
+                K-Pop
+            </button>
+            <button onclick="filterGenre('EDM');">
+                EDM
+            </button>
+            <button onclick="filterGenre('ELECTRONIC');">
+                Electronic
+            </button>
+        </div>
+    </div>
+
+    <div class="filters">
+        <p>Sort by:</p>
+        <div class="sort-button">
+            <button onclick="sortBy('NAME_ASC');">
+                Sort by Name (A-Z)
+            </button>
+            <button onclick="sortBy('NAME_DESC');">
+                Sort by Name (Z-A)
+            </button>
+            <button onclick="sortBy('POPULARITY');">
+                Sort by Follower
+            </button>
+        </div>
+    </div>
 
     <div id="card-container"></div>
+
     <div class="card"  style="display: none;">
         <div class="card-content">
             <h2>Artist Name</h2>
 
             <img src="https://4kwallpapers.com/images/wallpapers/lisa-blackpink-thai-singer-asian-girl-k-pop-singer-3840x2160-3232.jpg" alt="Artist image">
 
+            <div class="card-rank">
+                <ul>
+                    <li>Rank</li>
+                </ul>
+            </div>
             <div class="card-follower-count">Follower</div>
             <div class="card-description">
                 <div class="card-genre">
                     <ul>
-                        <li>Genre</li>
-                        <li>Genre</li>
                         <li>Genre</li>
                     </ul>
                 </div>
@@ -58,12 +96,9 @@
                 </div>
             </div>
         </div>
-        <div class="Artists"></div>
     </div>
     <div class="footer">
-        <button onclick="quoteAlert();">
-            Get A Quote!
-        </button>
+        <p>2024 Snap SEA Assessment</p>
     </div>
 </body>
 

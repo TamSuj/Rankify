@@ -23,22 +23,6 @@
  *
  */
 
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
-
-const Artist = {
-  img: String,
-  name: String,
-  rank: Number,
-  genre: String,
-  followers: Number,
-  url: String,
-};
-
 // This is an array of strings (artist titles)
 let titles = [];
 
@@ -57,6 +41,10 @@ function showCards() {
   });
 }
 
+function formatNumber(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //Credit: Stackoverflow
+}
+
 function editCardContent(card, artist) {
   card.style.display = "block";
 
@@ -65,10 +53,17 @@ function editCardContent(card, artist) {
 
   const cardImage = card.querySelector("img");
   cardImage.src = artist.images[0].url;
-  cardImage.alt = artist.name + "Image";
+  cardImage.alt = artist.name + " Image";
+
+  const cardRank = card.querySelector(".card-rank ul");
+  cardRank.innerHTML = "";
+  const rankItem = document.createElement("li");
+  rankItem.textContent = "#" + artist.popularity;
+  cardRank.appendChild(rankItem);
 
   const cardFollowers = card.querySelector(".card-follower-count");
-  cardFollowers.textContent = "Followers: " + artist.followers.total;
+  cardFollowers.textContent =
+    "Followers: " + formatNumber(artist.followers.total);
 
   const cardGenre = card.querySelector(".card-genre ul");
   cardGenre.innerHTML = "";
@@ -82,8 +77,6 @@ function editCardContent(card, artist) {
 
   const cardLink = card.querySelector(".card-link a");
   cardLink.href = artist.external_urls.spotify;
-
-  console.log("new card added for:", artist.name);
 }
 
 // This calls the addCards() function when the page is first loaded
@@ -96,30 +89,82 @@ function externalLinkAlert() {
 
 // Sorting artist according to their rank (DES/ASC)
 function sortBy(order) {
-  if (order === "ASC") {
-    // ascending order
-  } else if (order === "DES") {
-    // descending order
-  } else {
-    console.error("Invalid order");
+  switch (order) {
+    case "NAME_ASC":
+      response.artists.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "NAME_DESC":
+      response.artists.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case "POPULARITY":
+      response.artists.sort((a, b) => a.popularity - b.popularity);
+      break;
+    default:
+      alert("Invalid order");
+      console.error("Invalid order");
   }
-  // something here
+
   showCards(); // Call showCards again to refresh
 }
 function filterGenre(type) {
+  let filteredList = [];
+
   if (type === "POP") {
-    // Pop genre
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("Pop"),
+    );
   } else if (type === "R&B") {
-    // R&B genre
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("R&B"),
+    );
   } else if (type === "KPOP") {
-    // KPOP genre
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("K-pop"),
+    );
   } else if (type === "ROCK") {
-    // Rock genre
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("Rock"),
+    );
+  } else if (type === "EDM") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("EDM"),
+    );
+  } else if (type === "ELECTRONIC") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("Electronic"),
+    );
+  } else if (type === "ALL") {
+    filteredList = response.artists;
   } else {
     console.error("Invalid genre");
   }
   // something here
-  showCards(); // Call showCards again to refresh
+  updateCards(filteredList);
+}
+
+function updateCards(cardList) {
+  const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
+  const templateCard = document.querySelector(".card");
+
+  cardList.forEach((artist) => {
+    titles.push(artist.name);
+
+    const newCard = templateCard.cloneNode(true);
+    editCardContent(newCard, artist);
+    cardContainer.appendChild(newCard); // Add new card to the container
+  });
+}
+
+function searchByName(name) {
+  let nameSearched = document.getElementById("search-box").value;
+
+  let filteredList = response.artists.filter((artist) =>
+    artist.name.toLowerCase().includes(nameSearched.toLowerCase()),
+  );
+
+  if (filteredList.length === 0) alert("No artist found");
+  else updateCards(filteredList);
 }
 
 const response = {
@@ -166,7 +211,7 @@ const response = {
         },
       ],
       name: "Lorde",
-      popularity: 88,
+      popularity: 55,
       type: "artist",
       uri: "spotify:artist:6zFYqv1mOsgBRQbae3JJ9e",
     },
@@ -176,9 +221,9 @@ const response = {
       },
       followers: {
         href: null,
-        total: 65000000,
+        total: 35000000,
       },
-      genres: ["Pop", "R&B"],
+      genres: ["Pop", "R&B", "EDM"],
       href: "https://api.spotify.com/v1/artists/1uNFoZAHBGtllmzznpCI3s",
       id: "1uNFoZAHBGtllmzznpCI3s",
       images: [
@@ -189,9 +234,239 @@ const response = {
         },
       ],
       name: "Justin Bieber",
-      popularity: 93,
+      popularity: 19,
       type: "artist",
       uri: "spotify:artist:1uNFoZAHBGtllmzznpCI3s",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/3Y6XU1eeMTMf8DbXgH9fv3",
+      },
+      followers: {
+        href: null,
+        total: 300000,
+      },
+      genres: ["Rock", "Indie Rock"],
+      href: "https://api.spotify.com/v1/artists/3Y6XU1eeMTMf8DbXgH9fv3",
+      id: "3Y6XU1eeMTMf8DbXgH9fv3",
+      images: [
+        {
+          url: "https://m.media-amazon.com/images/M/MV5BYjdmY2YzNTItMmNhMi00MGExLTg1MmYtYTNlNzQwYTNiZGZiL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTI5NjIyMw@@._V1_.jpg",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "The Strokes",
+      popularity: 1080,
+      type: "artist",
+      uri: "spotify:artist:3Y6XU1eeMTMf8DbXgH9fv3",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/5pKCCKE2ajJHZ9KAiaK11H",
+      },
+      followers: {
+        href: null,
+        total: 5500000,
+      },
+      genres: ["Pop", "R&B"],
+      href: "https://api.spotify.com/v1/artists/5pKCCKE2ajJHZ9KAiaK11H",
+      id: "5pKCCKE2ajJHZ9KAiaK11H",
+      images: [
+        {
+          url: "https://i8.amplience.net/i/naras/GettyImages-1436969511.jpg?w=821&sm=c",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Rihanna",
+      popularity: 48,
+      type: "artist",
+      uri: "spotify:artist:5pKCCKE2ajJHZ9KAiaK11H",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/5pKCCKE2ajJHZ9KAiaK11H",
+      },
+      followers: {
+        href: null,
+        total: 12500000,
+      },
+      genres: ["Pop", "K-pop"],
+      href: "https://api.spotify.com/v1/artists/5pKCCKE2ajJHZ9KAiaK11H",
+      id: "5pKCCKE2ajJHZ9KAiaK11H",
+      images: [
+        {
+          url: "https://4kwallpapers.com/images/wallpapers/lisa-blackpink-thai-singer-asian-girl-k-pop-singer-3840x2160-3232.jpg",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Lisa",
+      popularity: 39,
+      type: "artist",
+      uri: "spotify:artist:5pKCCKE2ajJHZ9KAiaK11H",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/1dfeR4HaWDbWqFHLkxsg1d",
+      },
+      followers: {
+        href: null,
+        total: 1200000,
+      },
+      genres: ["K-pop"],
+      href: "https://api.spotify.com/v1/artists/1dfeR4HaWDbWqFHLkxsg1d",
+      id: "1dfeR4HaWDbWqFHLkxsg1d",
+      images: [
+        {
+          url: "https://6.soompi.io/wp-content/uploads/image/20230611150713_Jennie-1.jpg?s=900x600&e=t",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Jennie",
+      popularity: 92,
+      type: "artist",
+      uri: "spotify:artist:1dfeR4HaWDbWqFHLkxsg1d",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/0FUVtG48rOGP9vVbFVGSgM",
+      },
+      followers: {
+        href: null,
+        total: 800000,
+      },
+      genres: ["K-pop"],
+      href: "https://api.spotify.com/v1/artists/0FUVtG48rOGP9vVbFVGSgM",
+      id: "0FUVtG48rOGP9vVbFVGSgM",
+      images: [
+        {
+          url: "https://revistakoreain.com.br/wp-content/uploads/2022/04/Wonwoo-capa-1.jpg",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Wonwoo",
+      popularity: 150,
+      type: "artist",
+      uri: "spotify:artist:0FUVtG48rOGP9vVbFVGSgM",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY",
+      },
+      followers: {
+        href: null,
+        total: 62000000,
+      },
+      genres: ["Pop", "R&B", "Funk"],
+      href: "https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY",
+      id: "4dpARuHxo51G3z768sgnrY",
+      images: [
+        {
+          url: "https://www.khaosodenglish.com/wp-content/uploads/2024/01/246784523_10159868580947244_3075184647967836834_n-e1705463221321-696x464.jpeg",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Bruno Mars",
+      popularity: 32,
+      type: "artist",
+      uri: "spotify:artist:4dpARuHxo51G3z768sgnrY",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
+      },
+      followers: {
+        href: null,
+        total: 13000000,
+      },
+      genres: ["Pop", "Country", "Synth-pop"],
+      href: "https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02",
+      id: "06HL4z0CvFAxyc27GXpf02",
+      images: [
+        {
+          url: "https://media.npr.org/assets/img/2023/09/22/gettyimages-1250380030_slide-b7fd7fe615d89250cc78d56d4715c5af94355909.jpg",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Taylor Swift",
+      popularity: 8,
+      type: "artist",
+      uri: "spotify:artist:06HL4z0CvFAxyc27GXpf02",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/7n2wHs1TKAczGzO7Dd2rGr",
+      },
+      followers: {
+        href: null,
+        total: 20000000,
+      },
+      genres: ["Pop", "Jazz", "R&B"],
+      href: "https://api.spotify.com/v1/artists/7n2wHs1TKAczGzO7Dd2rGr",
+      id: "7n2wHs1TKAczGzO7Dd2rGr",
+      images: [
+        {
+          url: "https://ew.com/thmb/ZQtnNJ4skaFbcGnZ4kZNfvKavhI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/JohnLegend_05_1161_G-a3119dc02563460d8e6545605b5da004.jpg",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "John Legend",
+      popularity: 23,
+      type: "artist",
+      uri: "spotify:artist:7n2wHs1TKAczGzO7Dd2rGr",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/6KImCVD70vtIoJWnq6nGn3",
+      },
+      followers: {
+        href: null,
+        total: 30000000,
+      },
+      genres: ["Pop", "Rock", "Indie"],
+      href: "https://api.spotify.com/v1/artists/6KImCVD70vtIoJWnq6nGn3",
+      id: "6KImCVD70vtIoJWnq6nGn3",
+      images: [
+        {
+          url: "https://people.com/thmb/oYknHfU00T-5IJKaRP09XEcYgsU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/ed-sheeran-burn-exhibition-031523-1-732c6e09160745108c0e8a4fe1f4c52a.jpg",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Ed Sheeran",
+      popularity: 21,
+      type: "artist",
+      uri: "spotify:artist:6KImCVD70vtIoJWnq6nGn3",
+    },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5",
+      },
+      followers: {
+        href: null,
+        total: 15000000,
+      },
+      genres: ["Pop", "Rap", "Hip Hop"],
+      href: "https://api.spotify.com/v1/artists/0L8ExT028jH3ddEcZwqJJ5",
+      id: "0L8ExT028jH3ddEcZwqJJ5",
+      images: [
+        {
+          url: "https://theshaderoom.com/wp-content/uploads/2023/11/Muva-Tingz-Nicki-Minaj-Graces-Her-First-Cover-Of-American-Vogue-Speaks-On-Overcoming-Mom-Guilt-Self-Acceptance.jpg?w=1024",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "Nicki Minaj",
+      popularity: 25,
+      type: "artist",
+      uri: "spotify:artist:0L8ExT028jH3ddEcZwqJJ5",
     },
   ],
 };
