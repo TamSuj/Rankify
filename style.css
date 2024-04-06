@@ -67,6 +67,10 @@ body {
     transition: transform 0.3s ease;
 }
 
+.card:nth-child(even):hover {
+    transform: perspective(1000px) rotateY(-10deg);
+}
+
 .card:hover {
     transform: perspective(1000px) rotateY(10deg);
 }
@@ -105,9 +109,8 @@ body {
 }
 
 .card-genre ul li:nth-child(even) {
-    background-color: #F5E9CF;
-    color: #3E3232;
-    border: 2px solid #826F66;
+    background-color: lightgrey;
+    color: black;
 }
 
 .card-genre ul li:nth-child(3) {
@@ -142,10 +145,21 @@ body {
 }
 
 .card-follower-count {
-    transform: translateY(-25px);
+    transform: translateY(-35px);
+}
+
+.card-link {
+    display: flex;
+}
+
+.card-link img{
+    height: 25px;
+    width: auto;
 }
 
 .card-link a {
+    line-height: 25px;
+    margin-left: 10px;
     text-decoration: none;
     color: black;
 }
