@@ -96,7 +96,7 @@ body {
 
 .card-genre ul li {
     display: inline-block;
-    background-color: #CE5A67;
+    background-color: #B85042;
     color: white;
     padding: 7px 13px;
     margin-right: 5px;
@@ -105,8 +105,16 @@ body {
 }
 
 .card-genre ul li:nth-child(even) {
-    background-color: #61677A;
+    background-color: #F5E9CF;
+    color: #3E3232;
+    border: 2px solid #826F66;
 }
+
+.card-genre ul li:nth-child(3) {
+    background-color: #0B5269;
+    color: white;
+}
+
 
 .card-rank {
     padding: 5px 10px;
@@ -206,4 +214,8 @@ button:active {
 .search-bar p{
     padding-top: 10px;
     margin-left: auto;
+}
+
+::selection {
+    background: #F4CE14;
 }
