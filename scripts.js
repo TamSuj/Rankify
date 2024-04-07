@@ -468,5 +468,28 @@ const response = {
       type: "artist",
       uri: "spotify:artist:0L8ExT028jH3ddEcZwqJJ5",
     },
+    {
+      external_urls: {
+        spotify: "https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5",
+      },
+      followers: {
+        href: null,
+        total: 1250000,
+      },
+      genres: ["Pop", "R&B"],
+      href: "https://api.spotify.com/v1/artists/0L8ExT028jH3ddEcZwqJJ5",
+      id: "0L8ExT028jH3ddEcZwqJJ5",
+      images: [
+        {
+          url: "https://i8.amplience.net/i/naras/IMG_2721",
+          height: 300,
+          width: 300,
+        },
+      ],
+      name: "NIKI",
+      popularity: 90,
+      type: "artist",
+      uri: "spotify:artist:0L8ExT028jH3ddEcZwqJJ5",
+    },
   ],
 };
