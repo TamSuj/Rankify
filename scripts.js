@@ -194,7 +194,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/6zFYqv1mOsgBRQbae3JJ9e",
+        spotify: "https://open.spotify.com/artist/163tK9Wjr9P9DmM0AVK7lm",
       },
       followers: {
         href: null,
@@ -240,7 +240,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/3Y6XU1eeMTMf8DbXgH9fv3",
+        spotify: "https://open.spotify.com/artist/0epOFNiUfyON9EYx7Tpr6V",
       },
       followers: {
         href: null,
@@ -286,7 +286,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/5pKCCKE2ajJHZ9KAiaK11H",
+        spotify: "https://open.spotify.com/artist/5L1lO4eRHmJ7a0Q6csE5cT",
       },
       followers: {
         href: null,
@@ -309,7 +309,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/1dfeR4HaWDbWqFHLkxsg1d",
+        spotify: "https://open.spotify.com/artist/250b0Wlc5Vk0CoUsaCY84M",
       },
       followers: {
         href: null,
@@ -332,7 +332,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/0FUVtG48rOGP9vVbFVGSgM",
+        spotify: "https://open.spotify.com/artist/3rHcBT06Vb1XGVUWhDALZt",
       },
       followers: {
         href: null,
@@ -355,7 +355,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY",
+        spotify: "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C",
       },
       followers: {
         href: null,
@@ -401,7 +401,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/7n2wHs1TKAczGzO7Dd2rGr",
+        spotify: "https://open.spotify.com/artist/5y2Xq6xcjJb2jVM54GHK3t",
       },
       followers: {
         href: null,
@@ -424,7 +424,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/6KImCVD70vtIoJWnq6nGn3",
+        spotify: "https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V",
       },
       followers: {
         href: null,
@@ -447,7 +447,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5",
+        spotify: "https://open.spotify.com/artist/0hCNtLu0JehylgoiP8L4Gh",
       },
       followers: {
         href: null,
@@ -470,7 +470,7 @@ const response = {
     },
     {
       external_urls: {
-        spotify: "https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5",
+        spotify: "https://open.spotify.com/artist/2kxP07DLgs4xlWz8YHlvfh",
       },
       followers: {
         href: null,
