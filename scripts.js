@@ -1,172 +1,4 @@
-/**
- * Data Catalog Project Starter Code - SEA Stage 2
- *
- * This file is where you should be doing most of your work. You should
- * also make changes to the HTML and CSS files, but we want you to prioritize
- * demonstrating your understanding of data structures, and you'll do that
- * with the JavaScript code you write in this file.
- *
- * The comments in this file are only to help you learn how the starter code
- * works. The instructions for the project are in the README. That said, here
- * are the three things you should do first to learn about the starter code:
- * - 1 - Change something small in index.html or style.css, then reload your
- *    browser and make sure you can see that change.
- * - 2 - On your browser, right click anywhere on the page and select
- *    "Inspect" to open the browser developer tools. Then, go to the "console"
- *    tab in the new window that opened up. This console is where you will see
- *    JavaScript errors and logs, which is extremely helpful for debugging.
- *    (These instructions assume you're using Chrome, opening developer tools
- *    may be different on other browsers. We suggest using Chrome.)
- * - 3 - Add another string to the titles array a few lines down. Reload your
- *    browser and observe what happens. You should see a fourth "card" appear
- *    with the string you added to the array, but a broken image.
- *
- */
-
-// This is an array of strings (artist titles)
-let titles = [];
-
-// This function adds cards the page to display the data in the array
-function showCards() {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
-
-  response.artists.forEach((artist) => {
-    titles.push(artist.name);
-
-    const newCard = templateCard.cloneNode(true);
-    editCardContent(newCard, artist);
-    cardContainer.appendChild(newCard); // Add new card to the container
-  });
-}
-
-function formatNumber(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //Credit: Stackoverflow
-}
-
-function editCardContent(card, artist) {
-  card.style.display = "block";
-
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = artist.name;
-
-  const cardImage = card.querySelector("img");
-  cardImage.src = artist.images[0].url;
-  cardImage.alt = artist.name + " Image";
-
-  const cardRank = card.querySelector(".card-rank ul");
-  cardRank.innerHTML = "";
-  const rankItem = document.createElement("li");
-  rankItem.textContent = "#" + artist.popularity;
-  cardRank.appendChild(rankItem);
-
-  const cardFollowers = card.querySelector(".card-follower-count");
-  cardFollowers.textContent =
-    "Followers: " + formatNumber(artist.followers.total);
-
-  const cardGenre = card.querySelector(".card-genre ul");
-  cardGenre.innerHTML = "";
-
-  // Parse through the genres array and add them to the card as list items
-  artist.genres.forEach((genre) => {
-    const genreItem = document.createElement("li");
-    genreItem.textContent = genre;
-    cardGenre.appendChild(genreItem);
-  });
-
-  const cardLink = card.querySelector(".card-link a");
-  cardLink.href = artist.external_urls.spotify;
-}
-
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
-
-function externalLinkAlert() {
-  console.log("External URL clicked");
-  alert("We're taking you to the external site");
-}
-
-// Sorting artist according to their rank (DES/ASC)
-function sortBy(order) {
-  switch (order) {
-    case "NAME_ASC":
-      response.artists.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case "NAME_DESC":
-      response.artists.sort((a, b) => b.name.localeCompare(a.name));
-      break;
-    case "POPULARITY":
-      response.artists.sort((a, b) => a.popularity - b.popularity);
-      break;
-    default:
-      alert("Invalid order");
-      console.error("Invalid order");
-  }
-
-  showCards(); // Call showCards again to refresh
-}
-function filterGenre(type) {
-  let filteredList = [];
-
-  if (type === "POP") {
-    filteredList = response.artists.filter((artist) =>
-      artist.genres.includes("Pop"),
-    );
-  } else if (type === "R&B") {
-    filteredList = response.artists.filter((artist) =>
-      artist.genres.includes("R&B"),
-    );
-  } else if (type === "KPOP") {
-    filteredList = response.artists.filter((artist) =>
-      artist.genres.includes("K-pop"),
-    );
-  } else if (type === "ROCK") {
-    filteredList = response.artists.filter((artist) =>
-      artist.genres.includes("Rock"),
-    );
-  } else if (type === "EDM") {
-    filteredList = response.artists.filter((artist) =>
-      artist.genres.includes("EDM"),
-    );
-  } else if (type === "ELECTRONIC") {
-    filteredList = response.artists.filter((artist) =>
-      artist.genres.includes("Electronic"),
-    );
-  } else if (type === "ALL") {
-    filteredList = response.artists;
-  } else {
-    console.error("Invalid genre");
-  }
-  // something here
-  updateCards(filteredList);
-}
-
-function updateCards(cardList) {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
-
-  cardList.forEach((artist) => {
-    titles.push(artist.name);
-
-    const newCard = templateCard.cloneNode(true);
-    editCardContent(newCard, artist);
-    cardContainer.appendChild(newCard); // Add new card to the container
-  });
-}
-
-function searchByName(name) {
-  let nameSearched = document.getElementById("search-box").value;
-
-  let filteredList = response.artists.filter((artist) =>
-    artist.name.toLowerCase().includes(nameSearched.toLowerCase()),
-  );
-
-  if (filteredList.length === 0) alert("No artist found");
-  else updateCards(filteredList);
-}
-
+// Response sample from https://developer.spotify.com/
 const response = {
   artists: [
     {
@@ -493,3 +325,170 @@ const response = {
     },
   ],
 };
+
+// This function adds cards the page to display the data in the array
+function showCards() {
+  const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
+  const templateCard = document.querySelector(".card");
+
+  response.artists.forEach((artist) => {
+    const newCard = templateCard.cloneNode(true);
+    editCardContent(newCard, artist);
+    cardContainer.appendChild(newCard); // Add new card to the container
+  });
+}
+
+/**
+ * Takes a number and formats it with commas for readability (ex: 1000 -> 1,000)
+ * @param number
+ * @returns {string}
+ */
+function formatNumber(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //Credit: Stackoverflow
+}
+
+/**
+ * Edits the content of the card with the artist data
+ * @param card
+ * @param artist
+ */
+function editCardContent(card, artist) {
+  // Checking if the card and artist is defined
+  if (card !== undefined || artist !== undefined) {
+    console.error("Invalid input parameters for editCardContent()");
+    return; // Exit the function
+  }
+
+  card.style.display = "block";
+
+  const cardHeader = card.querySelector("h2");
+  cardHeader.textContent = artist.name;
+
+  const cardImage = card.querySelector("img");
+  cardImage.src = artist.images[0].url;
+  cardImage.alt = artist.name + " Image";
+
+  const cardRank = card.querySelector(".card-rank ul");
+  cardRank.innerHTML = "";
+  const rankItem = document.createElement("li");
+  rankItem.textContent = "#" + artist.popularity;
+  cardRank.appendChild(rankItem);
+
+  const cardFollowers = card.querySelector(".card-follower-count");
+  cardFollowers.textContent =
+    "Followers: " + formatNumber(artist.followers.total);
+
+  const cardGenre = card.querySelector(".card-genre ul");
+  cardGenre.innerHTML = "";
+
+  // Parse through the genres array and add them to the card as list items
+  artist.genres.forEach((genre) => {
+    const genreItem = document.createElement("li");
+    genreItem.textContent = genre;
+    cardGenre.appendChild(genreItem);
+  });
+
+  const cardLink = card.querySelector(".card-link a");
+  cardLink.href = artist.external_urls.spotify;
+}
+
+// This calls the addCards() function when the page is first loaded
+document.addEventListener("DOMContentLoaded", showCards);
+
+// Alert called when user click on an external link
+function externalLinkAlert() {
+  console.log("External URL clicked");
+  alert("We're taking you to the external site");
+}
+
+/**
+ * Sorts the cards based on the order passed (DES/ASC/POPULARITY)
+ * @param order
+ */
+function sortBy(order) {
+  switch (order) {
+    case "NAME_ASC":
+      response.artists.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "NAME_DESC":
+      response.artists.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case "POPULARITY":
+      response.artists.sort((a, b) => a.popularity - b.popularity);
+      break;
+    default:
+      alert("Invalid order");
+      console.error("Invalid order");
+  }
+
+  showCards(); // Call showCards again to refresh
+}
+
+/**
+ * Filters the cards based on the genre type passed
+ * @param type
+ */
+function filterGenre(type) {
+  let filteredList = [];
+
+  if (type === "POP") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("Pop"),
+    );
+  } else if (type === "R&B") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("R&B"),
+    );
+  } else if (type === "KPOP") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("K-pop"),
+    );
+  } else if (type === "ROCK") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("Rock"),
+    );
+  } else if (type === "EDM") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("EDM"),
+    );
+  } else if (type === "ELECTRONIC") {
+    filteredList = response.artists.filter((artist) =>
+      artist.genres.includes("Electronic"),
+    );
+  } else if (type === "ALL") {
+    filteredList = response.artists;
+  } else {
+    console.error("Invalid genre");
+  }
+  // something here
+  updateCards(filteredList);
+}
+//Credit @https://developer.mozilla.org/
+
+// Updates cards in card-container based on the filtered list
+function updateCards(cardList) {
+  const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
+  const templateCard = document.querySelector(".card");
+
+  //Parse through the filtered list which contains the artists []
+  cardList.forEach((artist) => {
+    const newCard = templateCard.cloneNode(true);
+    editCardContent(newCard, artist);
+    cardContainer.appendChild(newCard); // Add new card to the container
+  });
+}
+
+// Filter cards based on the name searched
+function searchByName() {
+  let nameSearched = document.getElementById("search-box").value; // Get the value from the search box
+
+  let filteredList = response.artists.filter((artist) =>
+    artist.name.toLowerCase().includes(nameSearched.toLowerCase()),
+  );
+
+  // If the filtered list is empty meaning no result is found, alert the user
+  if (filteredList.length === 0) alert("No artist found");
+  else updateCards(filteredList);
+}

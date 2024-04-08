@@ -64,7 +64,7 @@ body {
     width: 350px;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Grey shadow */
-    margin: 1rem 2rem 3rem 2rem ;
+    margin: 2rem 2rem 2rem 2rem;
     transition: transform 0.3s ease;
 }
 
@@ -143,6 +143,11 @@ body {
     border-radius: 30px;
     text-align: center;
     border: 3px solid white;
+    transition: transform 0.3s ease;
+}
+
+.card-rank ul li:hover {
+    transform: scale(1.1);
 }
 
 .card-follower-count {
@@ -163,12 +168,18 @@ body {
     margin-left: 10px;
     text-decoration: none;
     color: black;
+    transition: color 0.3s ease;
+}
+
+.card-link a:hover {
+    color: #1DB954;
 }
 
 .footer {
     display: flex;
     justify-content: center;
     border-top: 1px solid black;
+    margin-top: 2rem;
     padding: 10px;
 }
 
@@ -226,9 +237,47 @@ button:active {
 
 .search-bar p{
     padding-top: 10px;
-    margin-left: auto;
 }
 
 ::selection {
     background: #F4CE14;
+}
+
+@media screen and (max-width: 1409px) {
+    .card {
+        margin: 1rem 1rem 1rem 1rem ;
+        max-height: 110vw;
+    }
+    #card-container {
+        margin: 0;
+    }
+    .card-genre {
+        transform: translateY(-30px);
+    }
+    .card-link {
+        transform: translateY(-25px);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .title{
+        margin-top: 1rem;
+        font-size: 3em;
+    }
+    .subtitle {
+        font-size: 1.2em;
+    }
+    .navbar-menu ul li {
+        margin: 0 1rem 0 1rem;
+        font-size: 1em;
+    }
+    .search-bar {
+        margin-left: 3rem;
+    }
+    .filters {
+        margin-left: 3rem;
+    }
+    #card-container {
+        margin: 0 1rem 0 1rem;
+    }
 }
