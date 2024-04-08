@@ -326,6 +326,9 @@ const response = {
   ],
 };
 
+// This is an array of strings (artist titles)
+let titles = [];
+
 // This function adds cards the page to display the data in the array
 function showCards() {
   const cardContainer = document.getElementById("card-container");
@@ -333,6 +336,8 @@ function showCards() {
   const templateCard = document.querySelector(".card");
 
   response.artists.forEach((artist) => {
+    titles.push(artist.name);
+    
     const newCard = templateCard.cloneNode(true);
     editCardContent(newCard, artist);
     cardContainer.appendChild(newCard); // Add new card to the container
@@ -355,7 +360,7 @@ function formatNumber(number) {
  */
 function editCardContent(card, artist) {
   // Checking if the card and artist is defined
-  if (card !== undefined || artist !== undefined) {
+  if (card == undefined || artist == undefined) {
     console.error("Invalid input parameters for editCardContent()");
     return; // Exit the function
   }
@@ -474,6 +479,8 @@ function updateCards(cardList) {
 
   //Parse through the filtered list which contains the artists []
   cardList.forEach((artist) => {
+    titles.push(artist.name);
+    
     const newCard = templateCard.cloneNode(true);
     editCardContent(newCard, artist);
     cardContainer.appendChild(newCard); // Add new card to the container
