@@ -56,8 +56,9 @@ body {
 #card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
     margin: 0 4rem 0 4rem;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .card {
