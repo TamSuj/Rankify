@@ -2,6 +2,8 @@
 
 **Rankify** is an interactive catalog web app that showcases the world's top artists based on Spotify rankings. Designed for the Snap Engineering Academy challenge, this project allows users to browse, search, filter, and sort through global music sensations by genre, name, and popularity.
 
+![img.png](img.png)
+
 Try it out live: [Live demo](https://gsujaritchai-sea.netlify.app)
 
 ## 🌟 Features
